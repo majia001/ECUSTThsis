@@ -6,10 +6,9 @@
 \date{}
 \maketitle
 \thispagestyle{fancy}
-
 \ECUSTabstract 生产管理控制模块则是ERP系统的核心所在，它将企业的整个生产过程有机的结合在一起，使得企业能够有效的降低库存，提高效率。而云计算则是未来信息化、数字化发展的大趋势。本文将研究基于Hadoop的生产管理系统的设计和开发，探讨如生产管理系统与最新的云计算技术Hadoop相结合。
 
-\ECUSTkeywords 生产管理系统，生产管理系统，ERP，Hadoop
+\ECUSTkeywords 生产管理系统，ERP，Hadoop
 
 \section{研究背景}
 
@@ -54,7 +53,7 @@ ERP，即企业资源计划（enteprice resource planning，ERP），由美国�
 做什么都需要计划，制造企业的生惨更是如此。企业做出销售预测，或是接到客户订单时，必须快速做出反映。
 确定出货产品在哪一个具体时间生产完成的计划叫主生产计划，即MPS；确定出货产品下面的材料或半成品在什么时候购买或生产多少数量的计划叫物料需求计划，即MRP；确定生产产品、半成品需要多少工时能力的计划叫产能计划，即CRP；确定购买物料或外包外发需要多少资金，在计划什么时间需要付款的计划叫资金需求计划，即FRP。各计划之间的关系如图\ref{Figure2-1}所示。
 
-\ECUSTfigure{Figures/Proposal/MPS.png}{计划之间关系}{Figure2-1}
+\ECUSTfigure{Figures/Proposal/MPS.jpg}{计划之间关系}{Figure2-1}
 
 主生产计划MPS是ERP系统中计划的开始，排定了出货产品的完工日期后才能进行物料需求计划MRP。进行了物料需求计划，企业就知道工作中心在什么时候需要完成多少半成品或成品，据此可计算出完成半成品或成品所需要多少工时，即进行能力需求计划CRP。当能力不足时，可能需外包或外发，或者是重新调整MPS计划。可能某些订单需要提前或推后生产，同样，材料的购买日期也需要调整，资金的需求也随之会发生变化。也可能由于资金不足等原因需推迟订单交货日期等。因此，下面的计划由上面的计划驱动，即MRP、CRP、FRP都由MPS驱动，而MRP、CRP、FRP反过来都会影响MPS计划。
 
@@ -121,7 +120,7 @@ Hadoop是Apache组织下的一个开源项目，致力于开发一套分布式�
 
 整体模块架构构思如图\ref{Figure3-1}所示。
 
-\ECUSTfigure{Figures/Proposal/Design.png}{整体模块设计图}{Figure3-1}
+\ECUSTfigure[scale=0.9]{Figures/Proposal/Design.jpg}{整体模块设计图}{Figure3-1}
 
 本次系统设计由于是基于Hadoop的，由于Hadoop带有用 Java 语言编写的框架，因此运行在 Linux 系统上是非常理想的，并且在Linux系统中有较好的稳定性，所以本次课程设计完全在Linux平台下进行开发，选用比较主流的Linux操作系统Fedora17。Linux是一种自由和开放源码的类Unix操作系统，存在着许多不同的Linux版本，但它们都使用了Linux内核。Linux可安装在各种计算机硬件设备中，比如手机、平板电脑、路由器、视频游戏控制台、台式计算机、大型机和超级计算机。Linux是一个领先的操作系统，世界上运算最快的10台超级计算机运行的都是Linux操作系统。
 
@@ -129,9 +128,9 @@ Hadoop是Apache组织下的一个开源项目，致力于开发一套分布式�
 
 集成开发环境（IDE）采用eclipse，由于要采用SSH框架和Hadoop，还要搭配tomcat和Hadoop插件以及SSH框架中的jar包。Eclipse是一个开放源代码的、基于Java的可扩展开发平台。本次设计使用Eclipse J2EE版本。
 
-图\ref{Figure3-2}<++>是本次系统图形界面的初步设计。采用Web开发中主流的CSS+DIV布局，上方为系统的导航栏，放置系统各个功能模块的选择菜单。下方为各个菜单的显示界面，可以显示生产管理系统中的各个模块的数据。用户可以在界面上进行数据输入，数据将经校验后保存到数据库并进行数据处理，得到结果，并写入相关联的表中，这个过程对用户来说是透明的。
+图\ref{Figure3-2}是本次系统图形界面的初步设计。采用Web开发中主流的CSS+DIV布局，上方为系统的导航栏，放置系统各个功能模块的选择菜单。下方为各个菜单的显示界面，可以显示生产管理系统中的各个模块的数据。用户可以在界面上进行数据输入，数据将经校验后保存到数据库并进行数据处理，得到结果，并写入相关联的表中，这个过程对用户来说是透明的。
 
-\ECUSTfigure{Figures/Proposal/UI.png}{系统图形界面}{Figure3-2}
+\ECUSTfigure{Figures/Proposal/UI.jpg}{系统图形界面}{Figure3-2}
 
 接下来对各个功能模块及之间的内在关联进行详细说明，生产管理系统内部的各个模块并非独立分离的，而是有很强的逻辑业务关联，这也是本次系统设计的难点之一。
 
@@ -145,7 +144,9 @@ Hadoop是Apache组织下的一个开源项目，致力于开发一套分布式�
 
 产品结构模块。产品结构模块的主要功能是提供物料清单，也就是BOM表，描述生产各个成品或半成品所需的物料及物料数量，可以展开以树状结构显示成品或半成品的组件项目。提供2种展开模式，用量表顺向单阶展开和用途表逆向单阶展开。
 
-各个模块之间的关联性如图所示。
+各个模块之间的关联性如图\ref{Figure3-3}所示。
+
+\ECUSTfigure{Figures/Proposal/Relation.jpg}{模块关联性}{Figure3-3}
 
 
 \section{进度安排}
@@ -158,5 +159,17 @@ Hadoop是Apache组织下的一个开源项目，致力于开发一套分布式�
 \item 2013.5.1-2013.5.31 进一部完善设计结果，并撰写毕业论文。
 \item 2013.6.1-2013.6.18 完善论文及参加论文答辩。
 \end{itemize}
+
+\clearpage
+\nocite{1}
+\nocite{2}
+\nocite{3}
+\nocite{4}
+\nocite{5}
+\nocite{6}
+\nocite{7}
+\nocite{8}
+\nocite{9}
+\bibliography{References}
 
 \end{document}
