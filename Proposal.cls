@@ -53,7 +53,7 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\lhead{基于Hadoop的生产管理系统}
+\lhead{基于Hadoop的生产管理系统（开题报告）}
 \rhead{\thepage}
 
 
